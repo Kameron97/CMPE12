@@ -1,0 +1,50 @@
+Kameron Gill
+kgill2@ucsc.edu
+1476833
+CMPE 12: Section 01J
+Lab 1:Intro to Logic with Multimedia Logic
+
+Purpose:
+  The purpose of this lab was to get us to be familiar with the software: Multimedia Logic. Also, to familiarize ourselves with binary and also circuits.
+
+
+  Procedure:
+
+Part A:
+      For Part A, we simply connect a switch to an LED. By turning the switch on, the LED turns on. The purpose of this part is familiarize ourselves with the program
+Part B:
+      For Part B, we create a more complex circuit. WE connect 4 switches to 4 LEDS and also to an LED displaying a number
+      This helps us learn the Binary System because if 1 switch is on, 1 is displayed, 2 switches 3, 3 switches 7, etc.
+Part C:
+      For Part C we created a Truth table using AND OR gates. I used my pre-existing knowledge from CE-16 in order to create
+      the right truth table
+Part D:
+      For Part D, we created a guessing game from number 0 to 3. We would push a button and then use switches in order to guess
+      the right number in binary
+
+
+  Questions:
+
+Think about how you would make the digit display if you didn’t have one. Write out how you
+would approach doing so.
+
+Well, in Part B we saw an LED that did display the number, so we could us that for Part D.
+However if we did not have access to this feature I would use LEDS to it. Its going to be very long
+but if we put down 8 LEDS and then hooked all of them to AND gates we could get the right amount of LEDS to
+light to represent our desired number. For example, if we wanted to display 1, we hook up 1 switch directly to a light and thats it.
+To display 3, we could hook switch 1 and switch 2 to an AND gate and then the output would be 3 LEDS.
+
+
+ Make some sort of guess on how that random number generator works? How can things be
+really random in a computer with logic gates being so, well, logical?
+
+I am guessing, each time we press the button the number that is set in the generator is reset.
+From what I understand, computers are not really random, or "true random." I know other language (Java, C, python, etc)
+have API that allows randomness. I am going to guess It is another AND/OR/NANO gates in use. It might even follow a set pattern
+
+
+Results/Analysis
+
+This Lab helped me to understand the Mutlimedia Logic software and also understand binary, circuits, AND/OR/NANO gates a bit more. WE had to utilize all of
+these in order to complete the lab. The hardest part of this lab was construction the Truth Table, but I used previous knowledge in CE-16 in order
+to create the right equation.
