@@ -1,0 +1,43 @@
+Kameron Gill
+1476833
+kgill2@ucsc.edu
+CMPE 12: Section 01J
+
+Lab 2:Adding and Subtracting
+
+Purpose:
+    The purpose of this lab is to familiarize oneself with combinational logic circuit
+    and also learn more of the circuits.
+
+Part 1: Registrar:
+    For this part, we created a registrar that was meant to store the data from the adders.
+    I had some difficulty in knowing what exactly to input and output. I asked on piaza and realized, I'm
+    supposed to input the adder result.
+
+    Actually building the registrar was fairly simple. I copied the D FLipFlop given in the example and recreated
+    it 6 times. I put in a reciever for resetting and also to store. These would help determine when to store the numbers
+    or tell the FlipFlop to wipe its data. Once again not that hard of a part, I did not need to
+    debug this part at all
+
+
+Part 2: input
+  I had difficulty with this part. I did not really know what exactly was needed for the UI.
+  I knew there was a keypad that was needed and display, but I wasn't too sure how to form it.
+  I looked at piazza and found a diagram, which I then copied. I had three recievers connected to the
+  keypad, while i had 3 switches on the page. One switch was to decide to subtract or add, the other was to store, and the
+  final one was to reset. Then i had a 7-segment light display the number and finally, the total display
+
+Part 3: Adder
+
+    I copied the adder from the book. Its basically just a XOR and AND gate. And I made 6 of these full adders
+    and then connected them. This does the adding/subtracting
+
+Part 4: invertor
+    This part is very crucial for subtracting at least. And is also why we used 6 bits instead of 4 bits
+    We do 2-bits complement in order to find the answer in the circuits and this is where 6 bits and my inverter
+    comes to play. Basically I had a switch that determines add or subtracting, so when I switch it,
+    the mux determines which input is the best one. the 2-compliment or the correct one. So i have 6 2-1 MUX in order to do this
+    because we are determining 6-bits of numbers.
+
+
+When i subtract a smaller number from a larger number, i get a weird answer like 3F or 3E. It does not make much sense to me.
