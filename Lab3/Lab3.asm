@@ -11,7 +11,7 @@
 LEA R0, GREETING	;PRINTS GREETINGS
 PUTS
 
-BEGIN	LEA R0, ENTER		;REPEASTS INSTRUCTIONS
+START LEA R0, ENTER		;REPEASTS INSTRUCTIONS
 PUTS
 
 ;INITALIZES VAIBLES AND SETS TO 0
@@ -26,103 +26,104 @@ AND R7, R7, #0		;TEMP
 ST R0, INT		;Sets INT to 0, INT holds backup int
 BR INPUT
 
-INPUT		GETC			;Input character into R0
+INPUT		GETC	;Input character into R0
 OUT			;Print input onto screen
 BR NEWLINE
 
 
-NEWLINE AND R5, R5, #0
-AND R6, R6, #0
-ADD R6, R6, #-10  ;R6=LF
+NEWLINE AND R5, R5, #0		;R5=0
+AND R6, R6, #0			;R6=0
+ADD R6, R6, #-10  		;R6=LF
 ADD R5, R0, R6  ;CHECK FOR NEWLINE
 BRz FLAG
 
 NEGATIVE AND R6, R6, #0  ;R6=0
-AND R6, R6, R6, #-15
-AND R6, R6, R6, #-15
-AND R6, R6, R6, #-15  ;R6= "-"
-AND R5, R5, #0    ;CHECKS
+LD R6, NEG		;CHECKS FOR "-" IN ASCII BY LOADING -45
+ADD R5, R5, #0    ;CHECKS
 ADD R5, R0, R6
 BRz FLAG1
 
 EXIT AND R6, R6, #0  ;R6=0
-ADD R6, R6, #-16
-ADD R6, R6, #-16
-ADD R6, R6, #-16
-ADD R6, R6, #-16
-ADD R6, R6, #-16
-ADD R6, R6, #-8
+LD R6, X		;CHECKS FOR "X" IN ASCI -88
 AND R5, R5, #0
 ADD R5, R0, R6
-BRz END
+BRz END			;IF ITS -88, THEN  END PROGRAM
 
-MULT ADD R4, R4, #1
-ADD R6, R6, R1
-AND R5, R5, #0
-ADD R5, R5, #-10
-AND R7, R7, #0
-ADD R7, R5, R4
-BRnp MULT
-BRz ADD1
+SETUP AND R6, R6, #0	;R6=0
+ADD R0, R0, #-16	;MINUS 48 FROM INPUT
+ADD R0, R0, #-16
+ADD R0, R0, #-16
+LD R1, INT	;R1=INT
+BR MULT
+
+
 
 ADD1 ADD R6,R6, R0
 ST R6, INT
 BR INPUT
 
-FLAG1 AND R3, R3, #0
-ADD R3, R3, #1
-BR INPUT
+MULT ADD R4, R4, #1	;COUNTER++
+ADD R6, R6, R1		;R6+INT
+AND R5, R5, #0
+ADD R5, R5, #-10	;RUN LOOP 10 TIMES
+AND R7, R7, #0
+ADD R7, R5, R4
+BRnp MULT		;R6<10, GO TO MULT
+BRz ADD1		;;R6=10GO TO ADD1
+
+
 
 FLAG AND R6, R6, #0
-ADD R6, R6, #-1
+ADD R6, R6, #-1		;IF FLAG==1, INVERT(INT)
 ADD R6, R6, R3
 BRz INVERT
 
 AND R2, R2, #0
-LD R1, INT
+LD R1, INT		;R1=INT
 
 MASKUP AND R5, R5, #0
 AND R7, R7, #0
 
 MASKPR LEA R6, MASK
-ADD R6, R6, R2
-LDR R6, R6 0
+ADD R6, R6, R2		;R6+COUNTER
+LDR R6, R6 0		;0
 AND R5, R5, #0
 AND R0, R0, #0
-AND R5, R1, R6
-BRz ZERO
-BRnp ONE
+AND R5, R1, R6		
+BRnp ONE		;PRINT 1
+BRz ZERO		;PRINT 0
+
+FLAG1 AND R3, R3, #0
+ADD R3, R3, #1
+BR INPUT
 
 ZERO		AND R0, R0, #0		;Reset register
-ADD R0, R0, #15		;Add 48 for ASCII '0'
-ADD R0, R0, #15
-ADD R0, R0, #15
-ADD R0, R0, #3
+LD R0, ZERO1		;RO=48 ASCII FOR 0
 OUT			;Print '0'
-BR MASKCOUNTER		;Increment counter
+BR MASKCOUNTER	
+
+INVERT	LD R1, INT		;R1=INT
+NOT R1, R1		;NOT R1
+ADD R1, R1, #1		;R1++
+ST R1, INT		
+BR MASKUP		;MASK	
 
 ONE		AND R0, R0, #0		;Reset register
-ADD R0, R0, #15		;Add 49 for ASCII '1'
-ADD R0, R0, #15
-ADD R0, R0, #15
-ADD R0, R0, #4
+LD R0, ONE1		;R0=49 ASCII FOR 1
 OUT			;Print '1'
-BR MASKCOUNTER		;Increment counter
+BR MASKCOUNTER		
 
 
-MASKCOUNTER	ADD R2, R2, #1		;Increment mask counter by 1
+MASKCOUNTER ADD R2, R2, #1	;R2++;
 AND R7, R7, #0
-ADD R7, R2, #-16	;Check if MASKPTR looped 16 times
-BRzp START		;If it did ask for input again
-BRn SETUPMASK		;Else loop MASKPTR
+ADD R7, R2, #-16	
+BRzp START 		;R6<0
+BRn MASKUP		;R7=0
 
-INVERT		LD R1, INT		;Load INT into R1
-NOT R1, R1		;Flip R1
-ADD R1, R1, #1		;Add 1
-ST R1, INT		;Store new value into INT
-BR SETUPMASK		;Begin MASK-ing
 
-GOODBYE		LEA R0, BYE		;Load goodbye message
+
+
+END LEA R0, BYE		;Load goodbye message
 		PUTS			;Print goodbye message
 
 		HALT
@@ -130,12 +131,14 @@ GOODBYE		LEA R0, BYE		;Load goodbye message
 INT	.BLKW 16
 ZERO1 .FILL #48
 ONE1 .FILL #49
-X .FILL #88
+X .FILL #-88
+NEG .FILL #-45
 
-GREETING	.STRINGZ "Welcome to the conversion program"
-BEGIN	.STRINGZ "\nEnter a decimal number or X to quit:\n"
-THANK	.STRINGZ "\nThanks, here it is in binary\n"
-BYE	.STRINGZ "\nBye. Have a great day."
+
+GREETING	.STRINGZ "WELCOME TO LAB3!"
+ENTER	.STRINGZ "\nEnter a decimal number or X to quit:\n"
+THANK	.STRINGZ "\nHERE IS THE BINARY CONVERSION\n"
+BYE	.STRINGZ "\nEXITTING LAB3."
 
 
 
