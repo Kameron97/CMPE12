@@ -1,0 +1,20 @@
+Kameron Gill
+1476833
+kgill2@ucsc.edu
+			Lab 3 report
+
+	So the first thing i did for this lab, was to write it in Java so I
+	understand the procedure to follow in Assembly.
+
+	So for my specific algorithm,  I followed the given flow chart given to
+	us by the professor. What this Algorithm was , it basically checked if
+	it was negative first, by checking for a "-" sign which is -48 in ASCII.
+	if  it was, i added one to it and made it start from the begginging. If
+	if it wasnt I minused 48 from it and then made it loop 10 times by
+	by adding itself 10 times.
+
+	This was an extrmeely difficult lab. Hardest one so far. Assembly so
+	much different than java or C, so I could not really transfer my Java
+	code easily to assembly. I had to take extra steps since assembly does
+	not have all the functions of java by default. I got ALOT of help from
+	video tutorials and the Tas.
